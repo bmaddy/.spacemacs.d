@@ -319,6 +319,13 @@ you should place your code here."
   (require 'flycheck-joker)
   (add-to-list 'flycheck-global-modes 'clojure-mode)
   (add-to-list 'flycheck-global-modes 'clojurescript-mode)
+
+  ;; set lengths for commits as described here
+  ;; https://chris.beams.io/posts/git-commit/
+  (add-hook 'git-commit-setup-hook
+            (lambda ()
+              (setq git-commit-summary-max-length 50)
+              (set-fill-column 72)))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
