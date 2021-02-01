@@ -553,6 +553,9 @@ before packages are loaded."
             (lambda ()
               (setq git-commit-summary-max-length 50)
               (set-fill-column 72)))
+
+  ;; enable quick keys for org-todo
+  (setq evil-org-key-theme '(textobjects navigation additional insert todo))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
