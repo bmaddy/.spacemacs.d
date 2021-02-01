@@ -54,7 +54,7 @@ This function should only modify configuration layer settings."
      emacs-lisp
      git
      helm
-     ;; lsp
+     lsp
      (markdown :variables markdown-live-preview-engine 'vmd)
      multiple-cursors
      org
@@ -66,8 +66,7 @@ This function should only modify configuration layer settings."
      ;; version-control
      treemacs
      osx
-     (clojure :variables
-              clojure-enable-linters 'clj-kondo)
+     clojure
      ; (colors :variables colors-colorize-identifiers 'all)
      )
    ;; List of additional packages that will be installed without being
