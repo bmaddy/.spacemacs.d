@@ -32,7 +32,7 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(
+   '(asciidoc
      csv
      ansible
      html
@@ -66,14 +66,15 @@ This function should only modify configuration layer settings."
      ;; version-control
      treemacs
      osx
-     clojure
+     (clojure :variables
+              clojure-enable-clj-refactor t)
      ; (colors :variables colors-colorize-identifiers 'all)
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(flycheck-clj-kondo ediprolog)
+   dotspacemacs-additional-packages '(ediprolog)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
 
@@ -555,6 +556,13 @@ before packages are loaded."
 
   ;; enable quick keys for org-todo
   (setq evil-org-key-theme '(textobjects navigation additional insert todo))
+
+  ;; align selected forms (such as maps) with TAB or =
+  (setq clojure-align-forms-automatically t)
+
+  ;; prevent reformatting the entire file when something is pasted in
+  (setq lsp-enable-indentation nil)
+  (setq lsp-enable-on-type-formatting nil)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -570,7 +578,15 @@ before packages are loaded."
     (flycheck-clj-kondo ediprolog transient sesman parseedn parseclj a lv rainbow-mode rainbow-identifiers color-identifiers-mode flycheck-joker flycheck-pos-tip pos-tip flycheck-haskell yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode dash-functional helm-pydoc cython-mode anaconda-mode pythonic csv-mode ox-reveal ghub let-alist org-mime intero flycheck hlint-refactor hindent helm-hoogle haskell-snippets company-ghci company-ghc ghc company haskell-mode cmm-mode jinja2-mode ansible-doc ansible flyspell-correct-helm flyspell-correct auto-dictionary vmd-mode org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-download htmlize gnuplot orgit magit-gitflow evil-magit magit magit-popup git-commit smeargle helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link with-editor winum yaml-mode web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor js2-mode js-doc coffee-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode mmm-mode markdown-toc markdown-mode gh-md clj-refactor inflections edn multiple-cursors paredit yasnippet peg cider-eval-sexp-fu cider seq queue clojure-mode reveal-in-osx-finder pbcopy osx-trash osx-dictionary launchctl ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide ido-vertical-mode hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async quelpa package-build spacemacs-theme)))
  '(safe-local-variable-values
    (quote
-    ((cider-preferred-build-tool . "shadow-cljs")
+    ((cider-shadow-watched-builds ":main")
+     (cider-shadow-watched-builds "main")
+     (eval progn
+           (setenv "RULES_DATOMIC_URI" "datomic:dev://localhost:4334/rulesengine?password=admin"))
+     (eval progn
+           (setenv "ALLOW_INSECURE_COOKIE" "true"))
+     (eval progn
+           (setenv "ALLOW_INSECURE_COOKIES" "true"))
+     (cider-preferred-build-tool . "shadow-cljs")
      (cider-preferred-build-tool . "lein")))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -578,3 +594,37 @@ before packages are loaded."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+(defun dotspacemacs/emacs-custom-settings ()
+  "Emacs custom settings.
+This is an auto-generated function, do not modify its content directly, use
+Emacs customize menu instead.
+This function is called at the very end of Spacemacs initialization."
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(cider-font-lock-reader-conditionals nil)
+ '(evil-want-Y-yank-to-eol nil)
+ '(package-selected-packages
+   '(adoc-mode markup-faces flycheck-clj-kondo ediprolog transient sesman parseedn parseclj a lv rainbow-mode rainbow-identifiers color-identifiers-mode flycheck-joker flycheck-pos-tip pos-tip flycheck-haskell yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode dash-functional helm-pydoc cython-mode anaconda-mode pythonic csv-mode ox-reveal ghub let-alist org-mime intero flycheck hlint-refactor hindent helm-hoogle haskell-snippets company-ghci company-ghc ghc company haskell-mode cmm-mode jinja2-mode ansible-doc ansible flyspell-correct-helm flyspell-correct auto-dictionary vmd-mode org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-download htmlize gnuplot orgit magit-gitflow evil-magit magit magit-popup git-commit smeargle helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link with-editor winum yaml-mode web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor js2-mode js-doc coffee-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode mmm-mode markdown-toc markdown-mode gh-md clj-refactor inflections edn multiple-cursors paredit yasnippet peg cider-eval-sexp-fu cider seq queue clojure-mode reveal-in-osx-finder pbcopy osx-trash osx-dictionary launchctl ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide ido-vertical-mode hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async quelpa package-build spacemacs-theme))
+ '(safe-local-variable-values
+   '((cider-default-cljs-repl . figwheel)
+     (cider-clojure-cli-global-options . "-A:dev:datomic")
+     (cider-shadow-watched-builds ":main")
+     (cider-shadow-watched-builds "main")
+     (eval progn
+           (setenv "RULES_DATOMIC_URI" "datomic:dev://localhost:4334/rulesengine?password=admin"))
+     (eval progn
+           (setenv "ALLOW_INSECURE_COOKIE" "true"))
+     (eval progn
+           (setenv "ALLOW_INSECURE_COOKIES" "true"))
+     (cider-preferred-build-tool . "shadow-cljs")
+     (cider-preferred-build-tool . "lein"))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+)
