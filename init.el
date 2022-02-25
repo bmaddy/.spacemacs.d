@@ -70,12 +70,15 @@ This function should only modify configuration layer settings."
      (clojure :variables
               clojure-enable-clj-refactor t)
      ; (colors :variables colors-colorize-identifiers 'all)
+     (prolog :variables
+             ediprolog-system 'swi)
+     (unicode-fonts :variables unicode-fonts-enable-ligatures t)
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(ediprolog)
+   ;; dotspacemacs-additional-packages '(ediprolog)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
 
@@ -244,11 +247,17 @@ It should only modify the values of Spacemacs settings."
    ;; Default font or prioritized list of fonts. The `:size' can be specified as
    ;; a non-negative integer (pixel size), or a floating-point (point size).
    ;; Point size is recommended, because it's device independent. (default 10.0)
-   dotspacemacs-default-font '("Source Code Pro"
-                               :size 13
-                               :weight normal
-                               :width normal
-                               :powerline-scale 1.1)
+   dotspacemacs-default-font '(("Fira Code Symbol"
+                                :size 13
+                                :weight normal
+                                :width normal
+                                :powerline-scale 1.1)
+                               ("Source Code Pro"
+                                :size 13
+                                :weight normal
+                                :width normal
+                                :powerline-scale 1.1)
+                               )
 
    ;; The leader key (default "SPC")
    dotspacemacs-leader-key "SPC"
@@ -546,7 +555,7 @@ before packages are loaded."
   ;; (add-to-list 'flycheck-global-modes 'clojurec-mode)
 
   ;; use prolog-mode for .pl files
-  (add-to-list 'auto-mode-alist '("\\.pl\\'" . prolog-mode))
+  ;; (add-to-list 'auto-mode-alist '("\\.pl\\'" . prolog-mode))
 
   ;; set lengths for commits as described here
   ;; https://chris.beams.io/posts/git-commit/
@@ -608,9 +617,12 @@ This function is called at the very end of Spacemacs initialization."
  '(cider-font-lock-reader-conditionals nil)
  '(evil-want-Y-yank-to-eol nil)
  '(package-selected-packages
-   '(flycheck-clj-kondo ediprolog transient sesman parseedn parseclj a lv rainbow-mode rainbow-identifiers color-identifiers-mode flycheck-joker flycheck-pos-tip pos-tip flycheck-haskell yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode dash-functional helm-pydoc cython-mode anaconda-mode pythonic csv-mode ox-reveal ghub let-alist org-mime intero flycheck hlint-refactor hindent helm-hoogle haskell-snippets company-ghci company-ghc ghc company haskell-mode cmm-mode jinja2-mode ansible-doc ansible flyspell-correct-helm flyspell-correct auto-dictionary vmd-mode org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-download htmlize gnuplot orgit magit-gitflow evil-magit magit magit-popup git-commit smeargle helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link with-editor winum yaml-mode web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor js2-mode js-doc coffee-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode mmm-mode markdown-toc markdown-mode gh-md clj-refactor inflections edn multiple-cursors paredit yasnippet peg cider-eval-sexp-fu cider seq queue clojure-mode reveal-in-osx-finder pbcopy osx-trash osx-dictionary launchctl ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide ido-vertical-mode hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async quelpa package-build spacemacs-theme))
+   '(ligature flycheck-clj-kondo ediprolog transient sesman parseedn parseclj a lv rainbow-mode rainbow-identifiers color-identifiers-mode flycheck-joker flycheck-pos-tip pos-tip flycheck-haskell yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode dash-functional helm-pydoc cython-mode anaconda-mode pythonic csv-mode ox-reveal ghub let-alist org-mime intero flycheck hlint-refactor hindent helm-hoogle haskell-snippets company-ghci company-ghc ghc company haskell-mode cmm-mode jinja2-mode ansible-doc ansible flyspell-correct-helm flyspell-correct auto-dictionary vmd-mode org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-download htmlize gnuplot orgit magit-gitflow evil-magit magit magit-popup git-commit smeargle helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link with-editor winum yaml-mode web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor js2-mode js-doc coffee-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode mmm-mode markdown-toc markdown-mode gh-md clj-refactor inflections edn multiple-cursors paredit yasnippet peg cider-eval-sexp-fu cider seq queue clojure-mode reveal-in-osx-finder pbcopy osx-trash osx-dictionary launchctl ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide ido-vertical-mode hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async quelpa package-build spacemacs-theme))
  '(safe-local-variable-values
-   '((lsp-file-watch-ignored-directories quote
+   '((eval progn
+           (setenv "RULES_DATOMIC_URI" "datomic:mem://rulesengine")
+           (setenv "RULES_AUTH_TOKEN" "token"))
+     (lsp-file-watch-ignored-directories quote
                                          ("/../data" "/target" "/resources/public/js/compiled/"))
      (javascript-backend . tide)
      (javascript-backend . tern)
